@@ -77,7 +77,7 @@ int zmq::plain_client_t::process_handshake_command (msg_t *msg_)
         rc = process_error (cmd_data, data_size);
     else {
         //  Temporary support for security debugging
-        puts ("PLAIN I: invalid handshake command");
+        ////puts ("PLAIN I: invalid handshake command");
         errno = EPROTO;
         rc = -1;
     }

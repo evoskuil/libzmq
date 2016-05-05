@@ -123,7 +123,7 @@ int zmq::null_mechanism_t::process_handshake_command (msg_t *msg_)
 {
     if (ready_command_received || error_command_received) {
         //  Temporary support for security debugging
-        puts ("NULL I: client sent invalid NULL handshake (duplicate READY)");
+        ////puts ("NULL I: client sent invalid NULL handshake (duplicate READY)");
         errno = EPROTO;
         return -1;
     }
@@ -140,7 +140,7 @@ int zmq::null_mechanism_t::process_handshake_command (msg_t *msg_)
         rc = process_error_command (cmd_data, data_size);
     else {
         //  Temporary support for security debugging
-        puts ("NULL I: client sent invalid NULL handshake (not READY)");
+        ////puts ("NULL I: client sent invalid NULL handshake (not READY)");
         errno = EPROTO;
         rc = -1;
     }
@@ -282,7 +282,7 @@ int zmq::null_mechanism_t::receive_and_process_zap_reply ()
             break;
         if ((msg [i].flags () & msg_t::more) == (i < 6? 0: msg_t::more)) {
             //  Temporary support for security debugging
-            puts ("NULL I: ZAP handler sent incomplete reply message");
+            ////puts ("NULL I: ZAP handler sent incomplete reply message");
             errno = EPROTO;
             rc = -1;
             break;
@@ -295,7 +295,7 @@ int zmq::null_mechanism_t::receive_and_process_zap_reply ()
     //  Address delimiter frame
     if (msg [0].size () > 0) {
         //  Temporary support for security debugging
-        puts ("NULL I: ZAP handler sent malformed reply message");
+        ////puts ("NULL I: ZAP handler sent malformed reply message");
         errno = EPROTO;
         rc = -1;
         goto error;
@@ -304,7 +304,7 @@ int zmq::null_mechanism_t::receive_and_process_zap_reply ()
     //  Version frame
     if (msg [1].size () != 3 || memcmp (msg [1].data (), "1.0", 3)) {
         //  Temporary support for security debugging
-        puts ("NULL I: ZAP handler sent bad version number");
+        ////puts ("NULL I: ZAP handler sent bad version number");
         errno = EPROTO;
         rc = -1;
         goto error;
@@ -313,7 +313,7 @@ int zmq::null_mechanism_t::receive_and_process_zap_reply ()
     //  Request id frame
     if (msg [2].size () != 1 || memcmp (msg [2].data (), "1", 1)) {
         //  Temporary support for security debugging
-        puts ("NULL I: ZAP handler sent bad request ID");
+        ////puts ("NULL I: ZAP handler sent bad request ID");
         errno = EPROTO;
         rc = -1;
         goto error;
@@ -322,7 +322,7 @@ int zmq::null_mechanism_t::receive_and_process_zap_reply ()
     //  Status code frame
     if (msg [3].size () != 3) {
         //  Temporary support for security debugging
-        puts ("NULL I: ZAP handler rejected client authentication");
+        ////puts ("NULL I: ZAP handler rejected client authentication");
         errno = EPROTO;
         rc = -1;
         goto error;
